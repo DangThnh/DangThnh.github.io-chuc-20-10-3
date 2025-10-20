@@ -1,0 +1,281 @@
+/* Thiết lập chung và Hình nền */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f7f7; /* Dự phòng */
+    overflow: hidden;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('Background.jpg'); /* Thay bằng tên file của bạn */
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+/* Khung chính (Card) */
+.card-container {
+    width: 90%; /* Phù hợp với mobile */
+    max-width: 450px; /* Giới hạn kích thước trên PC */
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.card {
+    background-color: #ffe0e6; /* Màu hồng nhạt */
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Ảnh đại diện */
+.avatar-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid #ff69b4; /* Viền màu hồng */
+    overflow: hidden;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lời chúc */
+.wish-text {
+    min-height: 80px; /* Giữ chỗ để lời chúc không làm khung nhảy */
+    color: #444;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Button */
+.surprise-button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+.surprise-button:hover {
+    background-color: #e34fa6;
+}
+
+/* Tương thích PC/Desktop */
+@media (min-width: 768px) {
+    .card-container {
+        width: 400px;
+    }
+}
+
+/* --- Animation Bó Hoa (Rose Bouquet) --- */
+
+/* --- Animation Bó Hoa (Rose Bouquet) --- */
+
+.flower-animation {
+    position: fixed; /* Đảm bảo nằm giữa màn hình */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    opacity: 0; /* Ban đầu ẩn */
+    transition: opacity 1s ease-in-out, visibility 1s;
+    visibility: hidden;
+}
+
+.flower-animation.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Nền trắng bao quanh bó hoa */
+.bouquet-stage {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-color: white; /* Nền trắng */
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Đặt bó hoa phía dưới */
+    overflow: hidden;
+}
+
+/* Giấy gói hoa (Wrapper) */
+.wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 250px;
+    background-color: #f7b7cf; /* Màu giấy gói */
+    border-radius: 50% / 0 0 100% 100%;
+    transform-origin: bottom center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 1.5s ease-out;
+    opacity: 0; /* Ban đầu ẩn */
+}
+
+.wrapper-1 { background-color: #f4a7c0; width: 220px; height: 280px; transform: rotate(0deg); opacity: 0; transition-delay: 1.5s; }
+.wrapper-2 { background-color: #f7b7cf; width: 180px; height: 240px; transform: rotate(-10deg); left: 20px; opacity: 0; transition-delay: 1.7s; }
+.wrapper-3 { background-color: #f4a7c0; width: 180px; height: 240px; transform: rotate(10deg); right: 20px; opacity: 0; transition-delay: 1.7s; }
+
+/* Ruy băng */
+.ribbon {
+    position: absolute;
+    bottom: 10px;
+    width: 80px;
+    height: 40px;
+    background: linear-gradient(45deg, #ff007f, #e34fa6);
+    border-radius: 5px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.8s ease 3.5s; /* Hiện ruy băng sau cùng */
+}
+
+/* Container cho từng bông hoa (để dễ định vị) */
+.rose-container {
+    position: absolute;
+    bottom: 50px;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+/* Vị trí các cụm hoa */
+.rose-pos-1 { left: 120px; bottom: 180px; transition-delay: 2.0s; } /* Trung tâm */
+.rose-pos-2 { left: 50px; bottom: 150px; transition-delay: 2.5s; } /* Trái dưới */
+.rose-pos-3 { left: 190px; bottom: 150px; transition-delay: 3.0s; } /* Phải dưới */
+.rose-pos-4 { left: 100px; bottom: 250px; transition-delay: 3.2s; } /* Trên cùng */
+
+/* Kích thước hoa ngẫu nhiên */
+.small-rose { transform: scale(0.7); }
+.large-rose { transform: scale(1.2); }
+
+/* Thân cây */
+.stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 100px; /* Chiều dài thân cố định */
+    background-color: #38761d;
+    border-radius: 5px;
+    opacity: 0; /* Ban đầu ẩn */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Hình dáng Hoa Hồng - Sử dụng nhiều cánh hoa (petals) */
+.rose {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-bottom: -5px;
+}
+
+.petal {
+    position: absolute;
+    background-color: #ff007f; /* Màu hoa */
+    border-radius: 50% 50% 0 50%; /* Tạo hình dáng cánh hoa */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.p-1 { top: 0; left: 15px; width: 30px; height: 30px; transform: rotate(-30deg); background-color: #ff40ab;}
+.p-2 { top: 10px; left: 30px; width: 25px; height: 25px; transform: rotate(60deg); }
+.p-3 { top: 20px; left: 5px; width: 20px; height: 20px; transform: rotate(180deg); background-color: #ff40ab;}
+.p-4 { top: 35px; left: 20px; width: 15px; height: 15px; transform: rotate(-90deg); }
+
+
+/* CSS cho animation khi JS thêm class 'animate' */
+.flower-animation.animate .wrapper {
+    opacity: 1;
+    transform: rotate(0deg) scaleY(1); /* Hiện lớp giấy gói */
+}
+
+.flower-animation.animate .rose-container {
+    opacity: 1; /* Hiện cụm hoa */
+}
+
+.flower-animation.animate .rose-container .stem {
+    opacity: 1; /* Hiện thân cây */
+}
+
+.flower-animation.animate .ribbon {
+    opacity: 1;
+}
+
+/* --- Cập nhật cho Ảnh GIF và Lời Chúc Cuối --- */
+
+.surprise-display {
+    position: fixed; /* Đặt ở giữa màn hình */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90%; /* Phù hợp mobile */
+    max-width: 450px;
+    z-index: 20;
+    
+    /* Hiệu ứng mờ dần (Opacity 0 ban đầu) */
+    opacity: 0;
+    transition: opacity 2s ease-in; /* Thời gian hiện ra từ từ: 2 giây */
+}
+
+.surprise-display.hidden-gif {
+    opacity: 0 !important;
+    visibility: hidden;
+}
+
+.surprise-display.show-gif {
+    opacity: 1 !important;
+    visibility: visible;
+}
+
+.surprise-gif {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.final-message {
+    font-size: 1.8em; /* Kích thước chữ lớn */
+    font-weight: bold;
+    color: #ff69b4; /* Màu hồng */
+    margin-top: 20px;
+    animation: pulse 1.5s infinite; /* Thêm hiệu ứng nhấp nháy nhẹ */
+}
+
+/* Animation nhấp nháy cho lời chúc cuối */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Giữ nguyên CSS gốc cho khung chữ nhật màu hồng nhạt và nền */
